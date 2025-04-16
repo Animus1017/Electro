@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-const SignupForm = () => {
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { ACCOUNT_TYPE } from "../../../utils/constant";
+import { setSignupData } from "../../../redux/slices/authSlice";
+import { sendOtp } from "../../../services/operations/authAPI";
+const SignupForm = ({ setOtpSent }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
+  const onSubmit = (data) => {
+    console.log("here");
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!passwordRegex.test(data.password)) {
+      toast.error("Invalid password format");
+      return;
+    }
+    const signupData = { ...data, accountType };
+    dispatch(setSignupData(signupData));
+    dispatch(sendOtp(data.email, setOtpSent));
+  };
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.CUSTOMER);
+  const [searchParam, setSearchParam] = useSearchParams();
+  useEffect(() => {
+    setAccountType(
+      searchParam.get("user") ? ACCOUNT_TYPE.ADMIN : ACCOUNT_TYPE.CUSTOMER
+    );
+  }, [searchParam]);
   return (
-    <form
-      className="flex flex-col gap-6 md:gap-9"
-      //   onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col gap-5 ">
         {/* firstname and lastname */}
         <label className="flex flex-col gap-[6px] w-full">
-          <p className="flex gap-[2px] text-sm text-richblack-5 items-start">
+          <p className="flex gap-[2px] text-sm  items-start">
             First Name<sup className="text-base">*</sup>
           </p>
           <input
@@ -29,7 +53,7 @@ const SignupForm = () => {
           )}
         </label>
         <label className="flex flex-col gap-[6px] w-full">
-          <p className="flex gap-[2px] text-sm text-richblack-5 items-start">
+          <p className="flex gap-[2px] text-sm  items-start">
             Last Name<sup className="text-base">*</sup>
           </p>
           <input
@@ -46,7 +70,7 @@ const SignupForm = () => {
 
         {/* email */}
         <label className="flex flex-col gap-[6px]">
-          <p className="flex gap-[2px] text-sm text-richblack-5 items-start">
+          <p className="flex gap-[2px] text-sm  items-start">
             Email<sup className="text-base">*</sup>
           </p>
           <input
@@ -62,7 +86,7 @@ const SignupForm = () => {
         </label>
         {/* password */}
         <label className="flex flex-col gap-[6px] w-full">
-          <div className="flex gap-[2px] text-sm text-richblack-5 items-start">
+          <div className="flex gap-[2px] text-sm  items-start">
             Password<sup className="text-base">*</sup>{" "}
           </div>
           <input
@@ -78,8 +102,9 @@ const SignupForm = () => {
         </label>
       </div>
       <button
-        className="rounded-lg p-3 bg-yellow-50 font-medium text-richblack-900 shadow-[-0.5px_-1.5px_0px_0px_#0000001F_inset]"
+        className="text-sm font-bold  transition-all duration-300 py-[14px] w-fit px-8 rounded-3xl text-richblack-800 bg-yellow-100 hover:bg-richblack-800 hover:text-white"
         type="submit"
+        disabled={loading}
       >
         Register
       </button>

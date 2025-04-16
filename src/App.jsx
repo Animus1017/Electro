@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 function App() {
   const router = createBrowserRouter([
     {
@@ -44,16 +45,18 @@ function App() {
     {
       path: "/login",
       element: (
-        <div>
+        <div className="flex flex-col h-full">
           {/* <Navbar /> */}
-          <OpenRoute>{/* <Login /> */}</OpenRoute>
+          <OpenRoute>
+            <Login />
+          </OpenRoute>
         </div>
       ),
     },
     {
       path: "/register",
       element: (
-        <div>
+        <div className="flex flex-col h-full">
           {/* <Navbar /> */}
           <OpenRoute>
             <Register />

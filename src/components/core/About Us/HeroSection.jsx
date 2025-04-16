@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <div>
       {" "}
-      <img src="" alt="" />
+      <img src={hero} alt="" />
     </div>
   );
 };

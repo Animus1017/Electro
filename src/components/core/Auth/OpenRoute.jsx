@@ -7,7 +7,7 @@ const OpenRoute = ({ children }) => {
   if (!token) {
     return children;
   } else {
-    return <Navigate to="" />;
+    return <Navigate to="/account" />;
   }
 };
 
