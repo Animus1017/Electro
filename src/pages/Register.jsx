@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VerifyEmail from "../components/core/Auth/VerifyEmail";
 import SignupForm from "../components/core/Auth/SignupForm";
 import { FaCheck } from "react-icons/fa";
@@ -9,6 +9,7 @@ import Spinner from "../components/common/Spinner";
 const Register = () => {
   const [otpSent, setOtpSent] = useState(false);
   const { loading } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   if (loading) {
     return <Spinner />;
   }
@@ -28,7 +29,7 @@ const Register = () => {
       <div className="w-11/12 max-w-maxContent mx-auto gap-16 flex">
         <div className="flex flex-col gap-8 flex-grow">
           <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 w-full">
               <h1 className="text-3xl font-bold">
                 {otpSent ? "Verify Email" : "Create New Account"}
               </h1>
@@ -68,7 +69,7 @@ const Register = () => {
         </div>
         <div className="border border-richblack-50"></div>
         <div className="flex flex-col gap-5 flex-grow items-start">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-full">
             <h1 className="text-3xl font-bold">Login</h1>
             <div className="h-[1.5px] w-full flex">
               <div className="bg-yellow-100 h-full w-1/3"></div>
@@ -80,9 +81,10 @@ const Register = () => {
           </div>
           <button
             disabled={loading}
+            onClick={() => navigate("/login")}
             className="text-sm font-bold  transition-all duration-300 py-[14px] w-fit px-8 rounded-3xl text-richblack-800 bg-yellow-100 hover:bg-richblack-800 hover:text-white"
           >
-            <Link to="/login">Login</Link>
+            Login
           </button>
         </div>
       </div>

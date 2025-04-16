@@ -58,7 +58,7 @@ const Login = () => {
         </div>
         <div className="border border-richblack-50"></div>
         <div className="flex flex-col gap-5 flex-grow items-start">
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 w-full">
             <h1 className="text-3xl font-bold">Create New Account</h1>
             <div className="h-[1.5px] w-full flex">
               <div className="bg-yellow-100 h-full w-1/3"></div>

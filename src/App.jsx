@@ -49,22 +49,28 @@ function App() {
     {
       path: "/login",
       element: (
-        <div className="flex flex-col h-full">
-          {/* <Navbar /> */}
-          <OpenRoute>
-            <Login />
-          </OpenRoute>
+        <div className="flex flex-col h-full gap-24">
+          <div className="">
+            {/* <Navbar /> */}
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          </div>
+          <Footer />
         </div>
       ),
     },
     {
       path: "/register",
       element: (
-        <div className="flex flex-col h-full">
-          {/* <Navbar /> */}
-          <OpenRoute>
-            <Register />
-          </OpenRoute>
+        <div className="flex flex-col h-full gap-24">
+          <div>
+            {/* <Navbar /> */}
+            <OpenRoute>
+              <Register />
+            </OpenRoute>
+          </div>
+          <Footer />
         </div>
       ),
     },

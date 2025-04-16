@@ -63,7 +63,7 @@ const LoginForm = ({ setReset }) => {
           onClick={() => setReset(true)}
           className="hover:text-yellow-100 duration-300 transition-all"
         >
-          Forgotten Password?
+          Forgot Password
         </button>
       </div>
       <button
