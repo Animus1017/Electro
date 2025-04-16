@@ -3,6 +3,8 @@ import "./App.css";
 import Home from "./pages/Home";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import Register from "./pages/Register";
+import AboutUs from "./pages/AboutUs";
+import Footer from "./components/common/Footer";
 import Login from "./pages/Login";
 function App() {
   const router = createBrowserRouter([
@@ -12,18 +14,20 @@ function App() {
         <div className="flex flex-col gap-8 md:gap-16">
           {/* <Navbar /> */}
           <Home />
+          {/* <Footer /> */}
         </div>
       ),
     },
-    // {
-    //   path: "/about",
-    //   element: (
-    //     <div className="flex flex-col">
-    //       <Navbar />
-    //       <About />
-    //     </div>
-    //   ),
-    // },
+    {
+      path: "/about",
+      element: (
+        <div className="flex flex-col">
+          {/* <Navbar /> */}
+          <AboutUs />
+          <Footer />
+        </div>
+      ),
+    },
     // {
     //   path: "/contact",
     //   element: (
